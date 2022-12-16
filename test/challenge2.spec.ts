@@ -4,7 +4,7 @@ import { ethers } from "hardhat";
 describe("Solution", function () {
   describe("Check if the solution is correct", function () {
     it("Should retrieve the storage sorted", async function () {
-      const challengeFactory = await ethers.getContractFactory("Challenge");
+      const challengeFactory = await ethers.getContractFactory("Challenge2");
       const challengeContract = await challengeFactory.deploy();
 
       await challengeContract.deployed();

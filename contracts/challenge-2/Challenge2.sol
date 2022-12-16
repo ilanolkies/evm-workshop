@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.9;
 
-import "./Input.sol";
+import "./Input2.sol";
 
-contract Challenge {
+contract Challenge2 {
     Input input;
 
     constructor() {
@@ -13,7 +13,7 @@ contract Challenge {
     function solution() external returns (bool) {
         address inputContractAddr;
         assembly {
-            inputContractAddr       := sload(N) // TODO: Replace n with correct slot
+            inputContractAddr       := sload(9999) // TODO: Replace 9999 with correct slot
         }
         // Fill the storage using the Input contract's startChallenge function
         // If all is correct your initial storage should look like this:
