@@ -13,7 +13,7 @@ contract Challenge2 {
     function solution() external returns (bool) {
         address inputContractAddr;
         assembly {
-            inputContractAddr       := sload(9999) // TODO: Replace 9999 with correct slot
+            inputContractAddr       := sload(0x00) // TODO: Replace 9999 with correct slot
         }
         // Fill the storage using the Input contract's startChallenge function
         // If all is correct your initial storage should look like this:
@@ -22,6 +22,7 @@ contract Challenge2 {
         // ...
         // slot[9] = n_max
         bytes memory sig = abi.encodeWithSignature("startChallenge()");  //Function signature
+
         assembly {
             let arguments           := mload(0x40) // 0x40: free memory pointer
             mstore(arguments, sig)
@@ -37,6 +38,22 @@ contract Challenge2 {
             )
         }
 
+        for (uint256 i = 0; i < 10 - 1; i++) {
+            for (uint256 j = 0; j < 10 - i - 1; j++) {
+                assembly {
+                    let kx := add(j, 1)
+                    let ky := add(j, 2)
+
+                    let x := sload(kx)
+                    let y := sload(ky)
+
+                    if gt(x, y) {
+                        sstore(kx, y)
+                        sstore(ky, x)
+                    }
+                }
+            }
+        }
         // Sort the storage
         // If all is correct your final storage should look like this:
         // slot[0] = n0
